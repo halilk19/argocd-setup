@@ -1,0 +1,126 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-test-app-prod
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: argocd
+  # Add a this finalizer ONLY if you want these to cascade delete.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+
+spec:
+  # The project the application belongs to.
+  project: argocd-test
+
+  # Source of the application manifests
+  source:
+    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    targetRevision: HEAD
+    path: ./prod
+   
+    # directory
+    directory:
+      recurse: false
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prod
+
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+  ---
+  apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-test-app-uat
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: argocd
+  # Add a this finalizer ONLY if you want these to cascade delete.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+
+spec:
+  # The project the application belongs to.
+  project: argocd-test
+
+  # Source of the application manifests
+  source:
+    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    targetRevision: HEAD
+    path: ./uat
+   
+    # directory
+    directory:
+      recurse: false
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: uat
+
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+    ---
+  apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd-test-app-dev
+  # You'll usually want to add your resources to the argocd namespace.
+  namespace: argocd
+  # Add a this finalizer ONLY if you want these to cascade delete.
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+
+spec:
+  # The project the application belongs to.
+  project: argocd-test
+
+  # Source of the application manifests
+  source:
+    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    targetRevision: HEAD
+    path: ./dev
+   
+    # directory
+    directory:
+      recurse: false
+  # Destination cluster and namespace to deploy the application
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dev
+
+  # Sync policy
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+  
