@@ -8,10 +8,10 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
-    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+#   annotations:
+#     argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+#     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+#     argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
 
 spec:
   # The project the application belongs to.
@@ -19,9 +19,9 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    repoURL: https://halilk19@github.com/halilk19/argocd-kustomize.git
     targetRevision: HEAD
-    path: ./prod
+    path: ./overlays/prod
    
     # directory
     directory:
@@ -50,10 +50,10 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
-    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+#   annotations:
+#     argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+#     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+#     argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
 
 spec:
   # The project the application belongs to.
@@ -61,9 +61,9 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    repoURL: https://halilk19@github.com/halilk19/argocd-kustomize.git
     targetRevision: HEAD
-    path: ./uat
+    path: ./overlays/uat
    
     # directory
     directory:
@@ -92,10 +92,10 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 
-  annotations:
-    argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
-    argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
-    argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
+#   annotations:
+#     argocd-image-updater.argoproj.io/image-list: halilkarimis/argo-test:~1           # Versioning of Image or image list to listen or watch in image repo
+#     argocd-image-updater.argoproj.io/write-back-method: git:secret:argocd/git-creds  # Add git repo cred to Argocd
+#     argocd-image-updater.argoproj.io/git-branch: main                                # Branch to watch
 
 spec:
   # The project the application belongs to.
@@ -103,9 +103,9 @@ spec:
 
   # Source of the application manifests
   source:
-    repoURL: https://halilkarimis19@bitbucket.org/halilkarimis19/argocd-kustomize.git
+    repoURL: https://halilk19@github.com/halilk19/argocd-kustomize.git
     targetRevision: HEAD
-    path: ./dev
+    path: ./overlays/dev
    
     # directory
     directory:
